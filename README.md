@@ -1,7 +1,6 @@
 # Custom Unix Shell in C
 
-This project implements a custom Unix shell in C. It supports command parsing, built-in commands, foreground and background execution, file redirection, piping, and basic signal handling.
-
+This project implements a custom Unix shell in C. It supports command parsing, built-in commands, background and foreground execution, file redirection, piping, job control, and basic signal handling.
 
 ## Features
 
@@ -10,11 +9,18 @@ This project implements a custom Unix shell in C. It supports command parsing, b
   - `cd [dir]` – change directory
   - `help` – show help message
   - `exit` – exit the shell
-- Foreground and background process execution (`&`)
-- File input/output redirection (`<`, `>`)
-- Pipe handling for multi-stage commands (`|`)
-- Signal handling for `SIGINT` and `SIGTSTP`
+  - `jobs` – list background/stopped jobs
+  - `fg %jobid` – bring background job to foreground
+  - `bg %jobid` – resume a stopped job in the background
+- Foreground and background process execution using `&`
+- File input/output redirection using `<` and `>`
+- Pipe handling for multi-stage commands using `|`
+- Job management using a linked list for background/stopped jobs
+- Signal handling:
+  - `SIGINT` (Ctrl+C): prevents shell from exiting
+  - `SIGTSTP` (Ctrl+Z): marks a job as stopped and displays a message
 
+## Compilation
 
-
-
+```bash
+gcc -o custom-shell-c src/main.c
